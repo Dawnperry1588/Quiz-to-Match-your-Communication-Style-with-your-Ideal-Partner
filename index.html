@@ -4,12 +4,9 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RelateWell — Communication Style & Compatibility</title>
-
   <style>
     :root{
       --bg:#0b0b0d;
-      --card:#121218;
-      --card2:#171723;
       --text:#f3f3f5;
       --muted:#b9b9c3;
       --line:#2a2a38;
@@ -35,261 +32,820 @@
       color:var(--text);
       line-height:1.35;
     }
-
-    .wrap{max-width:1000px;margin:0 auto;padding:28px 18px 60px}
-    h1,h2,h3{margin:0}
-
-    .header{
-      margin-bottom:20px;
+    .wrap{max-width:1050px;margin:0 auto;padding:28px 18px 60px}
+    .topbar{
+      display:flex;gap:12px;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;
+      margin-bottom:16px;
     }
-    .header h1{font-size:24px}
-    .header p{color:var(--muted);max-width:70ch;margin-top:6px}
+    .brand{display:flex;flex-direction:column;gap:6px}
+    .brand h1{margin:0;font-size:22px;letter-spacing:.2px}
+    .brand p{margin:0;color:var(--muted);max-width:80ch}
+    .pill{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:8px 10px;border:1px solid var(--line);border-radius:999px;
+      background:rgba(255,255,255,.03);color:var(--muted);font-size:13px;
+    }
 
-    .layout{
+    .grid2{
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap:16px;
+      grid-template-columns: 1.15fr .85fr;
+      gap:14px;
+      align-items:start;
     }
-    @media(max-width:900px){
-      .layout{grid-template-columns:1fr}
+    @media (max-width: 950px){
+      .grid2{grid-template-columns:1fr}
     }
 
     .card{
-      background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
       border:1px solid var(--line);
       border-radius:16px;
       padding:18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
     }
+    .card h2{margin:0 0 10px;font-size:18px}
+    .muted{color:var(--muted)}
+    .divider{height:1px;background:var(--line);margin:14px 0}
 
-    .progress{
-      height:8px;
-      background:rgba(255,255,255,.06);
-      border-radius:999px;
-      overflow:hidden;
-      margin:10px 0 6px;
-    }
-    .bar{
-      height:100%;
-      width:0%;
-      background:linear-gradient(90deg,rgba(139,92,246,.9),rgba(34,197,94,.9));
-    }
-    .small{font-size:12px;color:var(--muted)}
-
-    .question{
-      margin:14px 0;
-      padding:14px;
-      border:1px solid var(--line);
-      border-radius:14px;
-      background:rgba(255,255,255,.02);
-    }
-    .qtitle{font-weight:700;margin-bottom:10px}
-    .opt{
-      display:flex;
-      gap:10px;
-      align-items:flex-start;
-      padding:8px;
-      border-radius:10px;
-      cursor:pointer;
-    }
-    .opt:hover{background:rgba(255,255,255,.05)}
-    .opt input{margin-top:2px}
-
-    button{
-      margin-top:12px;
-      padding:10px 14px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background:rgba(255,255,255,.06);
-      color:var(--text);
-      font-weight:600;
-      cursor:pointer;
-    }
-    button.primary{
-      background:rgba(139,92,246,.25);
-      border-color:rgba(139,92,246,.6);
-    }
-
-    .hidden{display:none}
-
-    .badge{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:999px;
-      background:rgba(255,255,255,.05);
-      font-size:13px;
-      color:var(--muted);
+    .qhead{
+      display:flex;justify-content:space-between;gap:12px;align-items:baseline;flex-wrap:wrap;
       margin-bottom:8px;
     }
-
-    .matrix{
-      display:grid;
-      grid-template-columns:1.2fr repeat(4,1fr);
-      gap:6px;
-      margin-top:10px;
+    .progress{
+      width:260px;max-width:100%;
+      height:8px;background:rgba(255,255,255,.06);
+      border-radius:999px;overflow:hidden;border:1px solid var(--line);
     }
-    .cell{
-      padding:10px;
-      text-align:center;
+    .bar{
+      height:100%;width:0%;
+      background: linear-gradient(90deg, rgba(139,92,246,.9), rgba(34,197,94,.9));
+    }
+    .small{font-size:12px;color:var(--muted)}
+    .note{
+      font-size:13px;color:var(--muted);
+      background:rgba(255,255,255,.03);
+      border:1px dashed rgba(255,255,255,.10);
       border-radius:12px;
+      padding:10px 12px;
+      margin-top:12px;
+    }
+
+    .question{
+      padding:14px 12px;border:1px solid var(--line);
+      border-radius:14px;background:rgba(255,255,255,.02);
+      margin:10px 0;
+    }
+    .qtitle{margin:0 0 10px;font-weight:750}
+    .opts{display:grid;gap:8px}
+    label.opt{
+      display:flex;gap:10px;align-items:flex-start;
+      padding:10px 10px;border:1px solid rgba(255,255,255,.08);
+      border-radius:12px;background:rgba(0,0,0,.15);
+      cursor:pointer;
+    }
+    label.opt:hover{border-color:rgba(139,92,246,.35)}
+    input[type="radio"]{margin-top:2px}
+    .opt .letter{width:22px;flex:0 0 22px;font-weight:800}
+    .opt .txt{color:var(--muted)}
+    .opt strong{color:var(--text)}
+
+    .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    button{
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:12px;
+      padding:10px 12px;
       font-weight:700;
       cursor:pointer;
-      border:1px solid rgba(255,255,255,.12);
+      transition: transform .03s ease, background .15s ease;
     }
-    .headerCell{background:rgba(255,255,255,.05);cursor:default}
-    .green{background:var(--green-bg);color:var(--green)}
-    .yellow{background:var(--yellow-bg);color:var(--yellow)}
-    .red{background:var(--red-bg);color:var(--red)}
-    .cell:hover:not(.headerCell){outline:2px solid rgba(255,255,255,.4)}
+    button:hover{background:rgba(255,255,255,.06)}
+    button:active{transform: translateY(1px)}
+    button.primary{
+      border-color:rgba(139,92,246,.55);
+      background: rgba(139,92,246,.18);
+    }
+    button.primary:hover{background: rgba(139,92,246,.24)}
 
-    .details{
+    .error{
+      display:none;
       margin-top:12px;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid var(--line);
+      padding:10px 12px;border-radius:12px;
+      border:1px solid rgba(180,35,24,.45);
+      background: rgba(180,35,24,.12);
+      color:#ffd5d1;
+      font-weight:700;
+    }
+
+    /* Results */
+    .badge{
+      display:inline-flex;align-items:center;gap:8px;
+      padding:7px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      font-size:13px;color:var(--muted);
+    }
+    .styleTitle{font-size:22px;margin:8px 0 6px}
+    .tagline{margin:0 0 10px;color:var(--muted)}
+    .twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media (max-width: 950px){.twocol{grid-template-columns:1fr}}
+    ul{margin:8px 0 0 18px;color:var(--muted)}
+    li{margin:6px 0}
+    .callout{
+      padding:12px 12px;border-radius:14px;border:1px solid rgba(255,255,255,.10);
       background:rgba(255,255,255,.03);
     }
+
+    /* Matrix */
+    .matrixHint{margin:0 0 10px;color:var(--muted);font-size:13px}
+    .matrix{
+      display:grid;
+      grid-template-columns: 1.25fr repeat(4, 1fr);
+      gap:6px;
+    }
+    .cell{
+      padding:12px 10px;text-align:center;border-radius:12px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.02);
+      cursor:pointer;
+      user-select:none;
+      min-height:44px;
+      display:flex;align-items:center;justify-content:center;
+      font-weight:800;
+    }
+    .cell.header{
+      cursor:default;
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      font-weight:850;
+    }
+    .cell.green{background: var(--green-bg); color: var(--green); border-color: rgba(27,127,59,.25)}
+    .cell.yellow{background: var(--yellow-bg); color: var(--yellow); border-color: rgba(138,107,0,.25)}
+    .cell.red{background: var(--red-bg); color: var(--red); border-color: rgba(180,35,24,.25)}
+    .cell:hover:not(.header){outline:2px solid rgba(255,255,255,.22)}
+    .cell.active{outline:3px solid rgba(139,92,246,.75)}
+    .cell.dim{opacity:.45}
+
+    .legend{
+      display:flex;gap:10px;flex-wrap:wrap;margin-top:10px;color:var(--muted);font-size:13px
+    }
+    .legend span{display:inline-flex;gap:8px;align-items:center}
+    .dot{width:12px;height:12px;border-radius:999px;display:inline-block}
+    .dot.g{background: var(--green-bg); border:1px solid rgba(27,127,59,.25)}
+    .dot.y{background: var(--yellow-bg); border:1px solid rgba(138,107,0,.25)}
+    .dot.r{background: var(--red-bg); border:1px solid rgba(180,35,24,.25)}
+    .hidden{display:none}
   </style>
 </head>
 
 <body>
-<div class="wrap">
-
-  <div class="header">
-    <h1>RelateWell</h1>
-    <p>
-      A communication style and compatibility tool to help you understand how you
-      communicate in relationships — and who you tend to pair best with.
-    </p>
-  </div>
-
-  <div class="layout">
-    <!-- QUIZ -->
-    <div class="card">
-      <h2>Communication Style Quiz</h2>
-      <div class="progress"><div class="bar" id="bar"></div></div>
-      <div class="small" id="progressText">0 / 25 answered</div>
-
-      <form id="quiz"></form>
-
-      <button type="button" class="primary" onclick="showResults()">View Results</button>
-    </div>
-
-    <!-- RESULTS -->
-    <div class="card">
-      <h2>Results</h2>
-      <div id="results" class="hidden">
-        <div class="badge" id="badge"></div>
-        <h3 id="styleTitle"></h3>
-        <p id="meaning" class="small"></p>
-
-        <h3 style="margin-top:14px">Compatibility Grid</h3>
-        <div class="matrix" id="matrix"></div>
-        <div id="pairDetails" class="details hidden"></div>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <h1>RelateWell — Communication Style & Compatibility</h1>
+        <p class="muted">
+          Answer 25 questions to learn your primary communication style (and, if applicable, a secondary style),
+          then explore a clickable compatibility grid.
+        </p>
       </div>
-      <p id="placeholder" class="small">Complete the quiz to see your results.</p>
+      <div class="pill" id="statusPill">25 questions • ~5 minutes</div>
+    </div>
+
+    <div class="grid2">
+      <!-- QUIZ -->
+      <div class="card" id="quizCard">
+        <div class="qhead">
+          <div>
+            <h2 style="margin:0">Communication Style Quiz</h2>
+            <div class="muted" style="font-size:13px;margin-top:4px">
+              Choose what’s most true <em>most of the time</em>.
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">
+            <div class="progress" aria-label="progress"><div class="bar" id="bar"></div></div>
+            <div class="small" id="progressText">0 / 25 answered</div>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>How scoring works:</strong> Each answer maps to a style (A/B/C/D). We’ll show your <strong>Primary</strong> style and,
+          if your runner-up is close, your <strong>Secondary</strong> style. If you tie, we break ties using conflict questions (Q6–Q10).
+        </div>
+
+        <form id="quizForm"></form>
+        <div class="error" id="errorBox">Please answer all questions before viewing results.</div>
+
+        <div class="btnrow">
+          <button type="button" class="primary" id="btnResults">View Results</button>
+          <button type="button" id="btnReset">Reset</button>
+        </div>
+
+        <div class="divider"></div>
+        <div class="small">
+          This tool is for self-reflection and relationship awareness. It’s not a diagnosis and does not predict outcomes.
+        </div>
+      </div>
+
+      <!-- RESULTS -->
+      <div class="card" id="resultsCard">
+        <h2 style="margin:0 0 10px">Results</h2>
+
+        <div id="resultsEmpty" class="muted">
+          Complete the quiz to see your primary style, optional secondary style, and the clickable compatibility grid.
+        </div>
+
+        <div id="resultsPane" class="hidden">
+          <div class="badge" id="primaryBadge"></div>
+          <div class="styleTitle" id="styleTitle"></div>
+          <p class="tagline" id="tagline"></p>
+
+          <div class="twocol">
+            <div class="callout">
+              <h3 style="margin:0 0 6px">What this means about you</h3>
+              <div class="muted" id="meaning"></div>
+            </div>
+            <div class="callout">
+              <h3 style="margin:0 0 6px">What you need</h3>
+              <ul id="needs"></ul>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="twocol">
+            <div class="callout">
+              <h3 style="margin:0 0 6px">Under stress, you may</h3>
+              <ul id="stress"></ul>
+            </div>
+            <div class="callout">
+              <h3 style="margin:0 0 6px">How to say it early</h3>
+              <div class="muted" id="earlyScript"></div>
+            </div>
+          </div>
+
+          <div id="secondaryBlock" class="note hidden"></div>
+
+          <div class="divider"></div>
+
+          <h3 style="margin:0 0 8px">Compatibility Grid</h3>
+          <p class="matrixHint">
+            Your primary row is emphasized. Click any square to see why it tends to feel easy, growth-oriented, or high-effort — and what makes it work.
+          </p>
+
+          <div class="matrix" id="matrix"></div>
+
+          <div class="legend">
+            <span><i class="dot g"></i> 🟢 Best Match</span>
+            <span><i class="dot y"></i> 🟡 Growth Match</span>
+            <span><i class="dot r"></i> 🔴 High Friction</span>
+          </div>
+
+          <div id="pairDetails" class="hidden" style="margin-top:14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.10);border-radius:14px;padding:14px"></div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
 
 <script>
+/* =========================
+   QUIZ QUESTIONS (25)
+   ========================= */
 const QUESTIONS = [
-  "When plans feel unclear, I usually…",
-  "If someone takes longer to reply, I tend to…",
-  "Not knowing where I stand makes me feel…",
-  "When communication feels inconsistent, I usually…",
-  "I feel safest when communication is…",
-  "When something bothers me, I usually…",
-  "During conflict, I’m most likely to…",
-  "I handle disagreement best when…",
-  "After conflict, I feel most settled when…",
-  "My biggest struggle during conflict is…",
-  "When I’m upset, I usually…",
-  "I feel closest when someone…",
-  "I show care by…",
-  "When asked how I feel, I usually…",
-  "Emotional conversations feel…",
-  "My ideal communication frequency is…",
-  "When someone wants more communication than I do…",
-  "When someone wants less communication than I do…",
-  "After emotional closeness, I usually feel…",
-  "Too much communication makes me feel…",
-  "When something feels off, I usually…",
-  "When relationships end, I tend to…",
-  "In dating, I value most…",
-  "I struggle most with others who are…",
-  "I feel most compatible with people who…"
+  // 1–5
+  { id:1,  text:"When plans feel unclear, I usually:", a:"Ask for clarity quickly", b:"Wait and see how things unfold", c:"Feel uneasy until it’s clarified", d:"Assume it will sort itself out" },
+  { id:2,  text:"If someone takes longer than usual to reply, I tend to:", a:"Check in directly", b:"Remind myself they’re probably busy", c:"Feel anxious and replay the interaction", d:"Pull back and distract myself" },
+  { id:3,  text:"Not knowing where I stand with someone makes me feel:", a:"Motivated to talk about it", b:"Curious but patient", c:"Preoccupied", d:"Detached" },
+  { id:4,  text:"When communication feels inconsistent, I usually:", a:"Address it openly", b:"Observe patterns quietly", c:"Feel unsettled", d:"Reduce my emotional investment" },
+  { id:5,  text:"I feel safest in relationships when communication is:", a:"Clear and direct", b:"Calm and thoughtful", c:"Frequent and emotionally engaged", d:"Low-pressure and flexible" },
+
+  // 6–10 (conflict tie-breaker section)
+  { id:6,  text:"When something bothers me, I usually:", a:"Say it clearly and calmly", b:"Think it through before speaking", c:"Talk it out right away", d:"Keep it to myself" },
+  { id:7,  text:"During conflict, I’m most likely to:", a:"Stay engaged and problem-solve", b:"Need time to cool down", c:"Feel emotionally overwhelmed", d:"Shut down or withdraw" },
+  { id:8,  text:"I handle disagreement best when:", a:"We address it directly", b:"I have time to process", c:"Emotions are acknowledged", d:"Space naturally diffuses it" },
+  { id:9,  text:"After conflict, I feel most settled when:", a:"Things are clearly repaired", b:"We revisit it later calmly", c:"I receive reassurance", d:"We move forward without rehashing" },
+  { id:10, text:"My biggest struggle during conflict is:", a:"Avoiding frustration with vagueness", b:"Feeling rushed to respond", c:"Feeling unheard or disconnected", d:"Feeling emotionally crowded" },
+
+  // 11–15
+  { id:11, text:"When I’m upset, I usually:", a:"Explain what I’m feeling", b:"Process internally first", c:"Express emotions as they come up", d:"Minimize or distract myself" },
+  { id:12, text:"I feel closest to someone when they:", a:"Communicate clearly and consistently", b:"Respect my pacing", c:"Share emotions openly", d:"Don’t pressure emotional conversations" },
+  { id:13, text:"I tend to show care by:", a:"Talking things through", b:"Thoughtful actions", c:"Emotional presence", d:"Being steady and reliable" },
+  { id:14, text:"When someone asks how I feel, I usually:", a:"Answer honestly and directly", b:"Take a moment to reflect", c:"Share openly", d:"Keep it brief" },
+  { id:15, text:"Emotional conversations feel:", a:"Necessary and productive", b:"Useful when timed well", c:"Connecting and reassuring", d:"Draining if overdone" },
+
+  // 16–20
+  { id:16, text:"My ideal communication frequency is:", a:"Regular and predictable", b:"Intentional but not constant", c:"Frequent and emotionally engaged", d:"Minimal but meaningful" },
+  { id:17, text:"When someone wants more communication than I do, I tend to:", a:"Talk about expectations", b:"Feel pressured", c:"Try to meet their needs", d:"Pull back" },
+  { id:18, text:"When someone wants less communication than I do, I tend to:", a:"Ask for clarity", b:"Adjust quietly", c:"Feel unsettled", d:"Match their distance" },
+  { id:19, text:"After emotional closeness, I usually feel:", a:"Grounded", b:"Reflective", c:"Wanting reassurance", d:"Needing space" },
+  { id:20, text:"Too much communication makes me feel:", a:"Frustrated if unclear", b:"Overstimulated", c:"Anxious if it fades", d:"Crowded" },
+
+  // 21–25
+  { id:21, text:"When something feels “off,” I usually:", a:"Bring it up", b:"Think it through", c:"Feel it deeply", d:"Let it pass" },
+  { id:22, text:"When relationships end or fade, I tend to:", a:"Want clear closure", b:"Reflect privately", c:"Replay and analyze", d:"Move on quickly" },
+  { id:23, text:"In dating, I value most:", a:"Honesty", b:"Thoughtfulness", c:"Emotional presence", d:"Independence" },
+  { id:24, text:"The communication trait I struggle with most in others is:", a:"Avoidance", b:"Emotional intensity", c:"Inconsistency", d:"Clinginess" },
+  { id:25, text:"I feel most compatible with people who:", a:"Say what they mean", b:"Respect processing time", c:"Stay emotionally engaged", d:"Are self-sufficient" },
 ];
 
-const OPTIONS = [
-  ["Ask for clarity","Wait it out","Feel anxious","Pull back"],
-  ["Check in","Assume busy","Overthink","Detach"]
-];
+const STYLE_KEY = { A:"cd", B:"tp", C:"co", D:"ac" };
+const STYLE_LABELS = { cd:"Clear Direct", tp:"Thoughtful", co:"Connection-Oriented", ac:"Autonomous" };
 
-const quiz = document.getElementById("quiz");
-QUESTIONS.forEach((q,i)=>{
-  const div=document.createElement("div");
-  div.className="question";
-  div.innerHTML=`<div class="qtitle">${i+1}. ${q}</div>
-    ${["A","B","C","D"].map(l=>`
-      <label class="opt">
-        <input type="radio" name="q${i}" value="${l}" onchange="updateProgress()">
-        ${l}
-      </label>`).join("")}`;
-  quiz.appendChild(div);
-});
+/* =========================
+   STYLE COPY
+   ========================= */
+const STYLE_COPY = {
+  cd: {
+    badge: "🟦 Primary Style: Clear Direct",
+    title: "Clear Direct Communicator",
+    tagline: "“I value clarity, honesty, and follow-through.”",
+    meaning:
+      "You tend to communicate openly and directly. When something feels unclear, you’d rather address it than guess. You feel most regulated when expectations are named and conversations are straightforward.",
+    needs: [
+      "Clear communication (no mixed signals)",
+      "Consistency between words and actions",
+      "Willingness to talk things through",
+      "Repair and follow-up when something feels off"
+    ],
+    stress: [
+      "Push for resolution before the other person is ready",
+      "Get impatient with vagueness",
+      "Feel responsible for “getting clarity”"
+    ],
+    earlyScript:
+      "“I do best with clear communication. If something changes or feels uncertain, I’d rather talk about it than guess.”"
+  },
+  tp: {
+    badge: "🟩 Primary Style: Thoughtful",
+    title: "Thoughtful Processor",
+    tagline: "“I need time to reflect before I speak.”",
+    meaning:
+      "You tend to process internally before you respond. You value calm, thoughtful conversations and can feel stressed when pressured to reply immediately. Your best communication is often clear — after you’ve had time to think.",
+    needs: [
+      "Respect for pacing and response time",
+      "Low-pressure conversations",
+      "Space to cool down during conflict",
+      "Partners who don’t interpret pauses as avoidance"
+    ],
+    stress: [
+      "Go quiet when you feel rushed",
+      "Delay hard conversations too long",
+      "Feel overwhelmed by emotional urgency"
+    ],
+    earlyScript:
+      "“If something comes up, I’m happy to talk — I just do best if I have a little time to think before I respond.”"
+  },
+  co: {
+    badge: "🟨 Primary Style: Connection-Oriented",
+    title: "Connection-Oriented Communicator",
+    tagline: "“I connect through emotional presence and reassurance.”",
+    meaning:
+      "You feel close through emotional engagement and responsiveness. Ambiguity and inconsistency tend to be activating. You thrive when there’s warmth, clarity, and emotional attunement.",
+    needs: [
+      "Responsiveness and follow-through",
+      "Emotional engagement (not just logistics)",
+      "Reassurance when things feel uncertain",
+      "Direct conversations rather than silence"
+    ],
+    stress: [
+      "Over-check for signs of distance",
+      "Seek reassurance more urgently",
+      "Feel preoccupied when things aren’t clarified"
+    ],
+    earlyScript:
+      "“I do best with consistency and checking in rather than guessing. It keeps me grounded.”"
+  },
+  ac: {
+    badge: "🟪 Primary Style: Autonomous",
+    title: "Autonomous / Contained Communicator",
+    tagline: "“I value independence and emotional self-regulation.”",
+    meaning:
+      "You tend to regulate by taking space and keeping communication low-pressure. You often show care through steadiness and actions rather than lots of verbal processing. You thrive when autonomy is respected and emotions aren’t forced.",
+    needs: [
+      "Autonomy and breathing room",
+      "Low-pressure emotional conversations",
+      "Trust and reliability over constant check-ins",
+      "Partners who don’t interpret space as rejection"
+    ],
+    stress: [
+      "Withdraw when things get intense",
+      "Minimize your own needs",
+      "Avoid conversations that feel emotionally crowded"
+    ],
+    earlyScript:
+      "“I’m consistent, but I’m not a constant texter. I do best with space and direct check-ins when something matters.”"
+  }
+};
+
+/* =========================
+   COMPATIBILITY MATRIX LEVELS
+   ========================= */
+const MATRIX_LEVELS = {
+  cd: { cd:"green", tp:"green", co:"yellow", ac:"red" },
+  tp: { cd:"green", tp:"green", co:"red",   ac:"yellow" },
+  co: { cd:"yellow",tp:"red",   co:"green", ac:"red" },
+  ac: { cd:"red",   tp:"yellow",co:"red",   ac:"green" }
+};
+
+/* =========================
+   PAIRING EXPLANATIONS (ALL 16)
+   ========================= */
+const PAIRING = {
+  // cd row
+  "cd-cd": { level:"Best Match", color:"green", icon:"🟢",
+    title:"Clear Direct × Clear Direct",
+    why:"Shared values around honesty, clarity, and follow-through. Conversations are efficient and mutual.",
+    worksWhen:"Directness stays respectful (not harsh) and repair includes warmth.",
+    datingTip:"Agree on what “clear” means (timing, plans, exclusivity) so you stay aligned."
+  },
+  "cd-tp": { level:"Best Match", color:"green", icon:"🟢",
+    title:"Clear Direct × Thoughtful Processor",
+    why:"Clarity meets reflection. One names things; the other adds depth and pacing.",
+    worksWhen:"Directness isn’t rushed and processing time is respected.",
+    datingTip:"Try: “If something comes up, can we talk tonight/tomorrow?”"
+  },
+  "cd-co": { level:"Growth Match", color:"yellow", icon:"🟡",
+    title:"Clear Direct × Connection-Oriented",
+    why:"Strong potential for warmth + clarity, but reassurance needs and pacing can differ.",
+    worksWhen:"Clarity includes emotional reassurance, not just facts.",
+    datingTip:"Pair a clear plan with warmth: “Friday at 7 — looking forward to it.”"
+  },
+  "cd-ac": { level:"High Friction", color:"red", icon:"🔴",
+    title:"Clear Direct × Autonomous / Contained",
+    why:"One seeks clarity through conversation; the other regulates through space. Silence can be misread as avoidance or pressure.",
+    worksWhen:"Autonomy is named early and directness is offered calmly (not intensely).",
+    datingTip:"Agree on frequency + response windows + how you handle conflict pauses."
+  },
+
+  // tp row
+  "tp-cd": { level:"Best Match", color:"green", icon:"🟢",
+    title:"Thoughtful Processor × Clear Direct",
+    why:"A stable mix of pacing + clarity. Reflection prevents escalation; directness prevents guessing.",
+    worksWhen:"Pauses are respected and nobody interprets them as rejection.",
+    datingTip:"Use “pause + return”: “I want to think and come back to this tomorrow.”"
+  },
+  "tp-tp": { level:"Best Match", color:"green", icon:"🟢",
+    title:"Thoughtful Processor × Thoughtful Processor",
+    why:"Mutual respect for space and calm. Deep, measured conversations can thrive here.",
+    worksWhen:"You don’t postpone hard conversations indefinitely.",
+    datingTip:"Schedule check-ins so important topics don’t drift."
+  },
+  "tp-co": { level:"High Friction", color:"red", icon:"🔴",
+    title:"Thoughtful Processor × Connection-Oriented",
+    why:"One needs time; the other needs immediacy. Timing mismatches can feel invalidating on both sides.",
+    worksWhen:"Timelines are explicit and reassurance is verbalized.",
+    datingTip:"Processor: reassure + timeline. Connector: ask for timeline (not constant contact)."
+  },
+  "tp-ac": { level:"Growth Match", color:"yellow", icon:"🟡",
+    title:"Thoughtful Processor × Autonomous / Contained",
+    why:"Shared independence and internal regulation can feel peaceful, but conflict topics may get avoided.",
+    worksWhen:"You practice repair and don’t rely on silence to fix things.",
+    datingTip:"Agree: “We can take space, and we always circle back.”"
+  },
+
+  // co row
+  "co-cd": { level:"Growth Match", color:"yellow", icon:"🟡",
+    title:"Connection-Oriented × Clear Direct",
+    why:"Warmth + clarity can be strong. Friction appears if clarity comes without emotional tone.",
+    worksWhen:"Directness includes emotional presence and reassurance.",
+    datingTip:"Ask clearly: “Consistency really helps me feel secure.”"
+  },
+  "co-tp": { level:"High Friction", color:"red", icon:"🔴",
+    title:"Connection-Oriented × Thoughtful Processor",
+    why:"Connection-seeking can feel like pressure; processing can feel like distance.",
+    worksWhen:"Clear return-times exist and both people tolerate different pacing.",
+    datingTip:"Use “timeline agreement” (revisit within 24–48 hours)."
+  },
+  "co-co": { level:"Best Match", color:"green", icon:"🟢",
+    title:"Connection-Oriented × Connection-Oriented",
+    why:"High emotional engagement, responsiveness, and shared language for feelings.",
+    worksWhen:"You keep boundaries and don’t confuse intensity with intimacy.",
+    datingTip:"Balance closeness with self-regulation: “I like checking in, and I also take care of myself.”"
+  },
+  "co-ac": { level:"High Friction", color:"red", icon:"🔴",
+    title:"Connection-Oriented × Autonomous / Contained",
+    why:"High reassurance needs meet high autonomy needs. Easy to slip into pursue–withdraw patterns.",
+    worksWhen:"Agreements are explicit and both people empathize with different regulation styles.",
+    datingTip:"Define “space” (how long/meaning) and “reassurance” (what counts) early."
+  },
+
+  // ac row
+  "ac-cd": { level:"High Friction", color:"red", icon:"🔴",
+    title:"Autonomous / Contained × Clear Direct",
+    why:"Directness can feel like pressure; space can feel like avoidance.",
+    worksWhen:"Direct partner stays calm; autonomous partner stays accountable and doesn’t disappear.",
+    datingTip:"Try: “I’m taking space, and I’m still in this — I’ll check in tonight.”"
+  },
+  "ac-tp": { level:"Growth Match", color:"yellow", icon:"🟡",
+    title:"Autonomous / Contained × Thoughtful Processor",
+    why:"Both value pacing and internal regulation; can drift into avoidance without intention.",
+    worksWhen:"You build a norm for repair and emotional naming.",
+    datingTip:"Set a default check-in cadence (weekly or after conflict) to maintain connection."
+  },
+  "ac-co": { level:"High Friction", color:"red", icon:"🔴",
+    title:"Autonomous / Contained × Connection-Oriented",
+    why:"Different needs around closeness and reassurance can trigger overwhelm vs insecurity.",
+    worksWhen:"Both stop moralizing: space isn’t rejection; reassurance isn’t neediness.",
+    datingTip:"Use small, consistent signals (short check-ins) instead of intense processing."
+  },
+  "ac-ac": { level:"Best Match", color:"green", icon:"🟢",
+    title:"Autonomous / Contained × Autonomous / Contained",
+    why:"Shared comfort with space, independence, and low-pressure communication.",
+    worksWhen:"You still practice repair so closeness doesn’t become optional.",
+    datingTip:"Plan intentional connection time instead of relying on convenience."
+  },
+};
+
+/* =========================
+   RENDER QUIZ
+   ========================= */
+const quizForm = document.getElementById("quizForm");
+
+function renderQuiz(){
+  quizForm.innerHTML = "";
+  QUESTIONS.forEach(q=>{
+    const div = document.createElement("div");
+    div.className = "question";
+    div.innerHTML = `
+      <p class="qtitle">${q.id}. ${q.text}</p>
+      <div class="opts">
+        ${optHTML(q.id, "A", q.a)}
+        ${optHTML(q.id, "B", q.b)}
+        ${optHTML(q.id, "C", q.c)}
+        ${optHTML(q.id, "D", q.d)}
+      </div>
+    `;
+    quizForm.appendChild(div);
+  });
+
+  quizForm.querySelectorAll('input[type="radio"]').forEach(r=>{
+    r.addEventListener("change", updateProgress);
+  });
+  updateProgress();
+}
+
+function optHTML(qid, letter, txt){
+  const name = `q${qid}`;
+  const id = `${name}_${letter}`;
+  return `
+    <label class="opt" for="${id}">
+      <input type="radio" id="${id}" name="${name}" value="${letter}" />
+      <div class="letter">${letter}.</div>
+      <div class="txt">${escapeHtml(txt)}</div>
+    </label>
+  `;
+}
 
 function updateProgress(){
-  const answered=[...document.querySelectorAll("input:checked")].length;
-  document.getElementById("bar").style.width=(answered/25*100)+"%";
-  document.getElementById("progressText").innerText=`${answered} / 25 answered`;
+  const answered = QUESTIONS.reduce((acc,q)=>{
+    const v = quizForm.querySelector(\`input[name="q\${q.id}"]:checked\`);
+    return acc + (v ? 1 : 0);
+  },0);
+  const pct = Math.round((answered/QUESTIONS.length)*100);
+  document.getElementById("bar").style.width = pct + "%";
+  document.getElementById("progressText").textContent = `${answered} / ${QUESTIONS.length} answered`;
+  document.getElementById("statusPill").textContent = `${answered}/${QUESTIONS.length} answered • Primary + optional Secondary`;
+}
+renderQuiz();
+
+/* =========================
+   SCORE QUIZ + TIE BREAK
+   ========================= */
+function scoreQuiz(){
+  const counts = { A:0, B:0, C:0, D:0 };
+  const answers = {};
+
+  for (const q of QUESTIONS){
+    const selected = quizForm.querySelector(\`input[name="q\${q.id}"]:checked\`);
+    if(!selected) return null;
+    const v = selected.value;
+    counts[v] += 1;
+    answers[q.id] = v;
+  }
+
+  const entries = Object.entries(counts).sort((a,b)=>b[1]-a[1]);
+  let primary = entries[0][0];
+  let secondary = entries[1][0];
+  const topScore = entries[0][1];
+  const secondScore = entries[1][1];
+
+  // Tie break using conflict questions 6–10
+  if (entries[0][1] === entries[1][1]){
+    const conflictIds = [6,7,8,9,10];
+    const tieLetters = [entries[0][0], entries[1][0]];
+    const tieCounts = { [tieLetters[0]]:0, [tieLetters[1]]:0 };
+
+    conflictIds.forEach(id=>{
+      const v = answers[id];
+      if (v === tieLetters[0]) tieCounts[tieLetters[0]]++;
+      if (v === tieLetters[1]) tieCounts[tieLetters[1]]++;
+    });
+
+    if (tieCounts[tieLetters[1]] > tieCounts[tieLetters[0]]) {
+      primary = tieLetters[1]; secondary = tieLetters[0];
+    }
+  }
+
+  const diff = topScore - secondScore;
+
+  // Secondary shown if within 0–5 points AND runner-up is meaningful
+  let showSecondary = (diff <= 5 && secondScore >= 6);
+
+  return { counts, primary, secondary, showSecondary, diff };
 }
 
-function showResults(){
-  const answers=[...document.querySelectorAll("input:checked")];
-  if(answers.length<25){alert("Please answer all questions.");return;}
+/* =========================
+   RENDER RESULTS + MATRIX
+   ========================= */
+const resultsEmpty = document.getElementById("resultsEmpty");
+const resultsPane  = document.getElementById("resultsPane");
+const primaryBadge = document.getElementById("primaryBadge");
+const styleTitle   = document.getElementById("styleTitle");
+const taglineEl    = document.getElementById("tagline");
+const meaningEl    = document.getElementById("meaning");
+const needsEl      = document.getElementById("needs");
+const stressEl     = document.getElementById("stress");
+const earlyEl      = document.getElementById("earlyScript");
+const secondaryBlock = document.getElementById("secondaryBlock");
+const matrixEl     = document.getElementById("matrix");
+const pairDetails  = document.getElementById("pairDetails");
 
-  const counts={A:0,B:0,C:0,D:0};
-  answers.forEach(a=>counts[a.value]++);
+let currentPrimaryKey = null;
+let activeCell = null;
 
-  const primary=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0][0];
-  const styleMap={
-    A:"Clear Direct Communicator",
-    B:"Thoughtful Processor",
-    C:"Connection-Oriented Communicator",
-    D:"Autonomous / Contained Communicator"
+function renderResults(payload){
+  const pKey = STYLE_KEY[payload.primary];
+  const sKey = STYLE_KEY[payload.secondary];
+
+  currentPrimaryKey = pKey;
+
+  const copy = STYLE_COPY[pKey];
+
+  resultsEmpty.classList.add("hidden");
+  resultsPane.classList.remove("hidden");
+
+  primaryBadge.textContent = copy.badge;
+  styleTitle.textContent = copy.title;
+  taglineEl.textContent = copy.tagline;
+
+  meaningEl.textContent = copy.meaning;
+  needsEl.innerHTML = copy.needs.map(x=>`<li>${escapeHtml(x)}</li>`).join("");
+  stressEl.innerHTML = copy.stress.map(x=>`<li>${escapeHtml(x)}</li>`).join("");
+  earlyEl.textContent = copy.earlyScript;
+
+  secondaryBlock.classList.add("hidden");
+  secondaryBlock.innerHTML = "";
+
+  if (payload.showSecondary){
+    const secondaryName = STYLE_COPY[sKey].title;
+    secondaryBlock.innerHTML = `
+      <div><strong>Secondary Style:</strong> ${escapeHtml(secondaryName)}</div>
+      <div style="margin-top:6px" class="muted">${escapeHtml(blendedExplanation(pKey, sKey))}</div>
+      <div style="margin-top:8px" class="small">Primary vs secondary difference: ${payload.diff} point(s).</div>
+    `;
+    secondaryBlock.classList.remove("hidden");
+  }
+
+  renderMatrix(pKey);
+  pairDetails.classList.add("hidden");
+  pairDetails.innerHTML = "";
+  if (activeCell){ activeCell.classList.remove("active"); activeCell = null; }
+}
+
+function blendedExplanation(primary, secondary){
+  const key = `${primary}-${secondary}`;
+  const map = {
+    "cd-tp": "You value clarity, but you also need time to reflect. You tend to speak directly once you’ve thought things through, and you can feel stressed if rushed.",
+    "tp-cd": "You process internally, and you also value directness. You do best when you can think first and then communicate clearly and concretely.",
+    "cd-co": "You want clarity and also value emotional engagement. You’re direct, and you feel best when clarity includes warmth and reassurance.",
+    "co-cd": "You connect emotionally and also appreciate directness. You thrive with partners who are both warm and clear.",
+    "tp-ac": "You value pacing and also regulate through independence. Intentional check-ins help space not turn into avoidance.",
+    "ac-tp": "You prefer low-pressure communication and also reflect internally. Calm agreements and minimal forcing support you.",
+    "co-tp": "You want connection but also need time sometimes. Reassurance plus a clear timeline keeps you grounded.",
+    "tp-co": "You process first but still value emotional connection. Timelines and gentle reassurance prevent misreads.",
+    "co-ac": "You may crave reassurance but also need space at times. Naming both needs early prevents push–pull cycles.",
+    "ac-co": "You value independence but still want connection in the right doses. Small consistent signals work better than intense processing.",
+    "cd-ac": "You’re direct but may need space when overloaded. Clear agreements help directness not feel like pressure.",
+    "ac-cd": "You prefer space but can communicate clearly when needed. Naming timelines keeps trust high."
   };
-
-  document.getElementById("results").classList.remove("hidden");
-  document.getElementById("placeholder").classList.add("hidden");
-  document.getElementById("badge").innerText="Primary Style";
-  document.getElementById("styleTitle").innerText=styleMap[primary];
-  document.getElementById("meaning").innerText=
-    "This reflects how you tend to communicate when you feel most like yourself.";
-
-  renderMatrix(primary);
+  return map[key] || "You have a blended profile. You may shift styles depending on stress level, context, and the partner’s communication rhythm.";
 }
 
-function renderMatrix(primary){
-  const matrix=document.getElementById("matrix");
-  matrix.innerHTML="";
-  const styles=["Clear Direct","Thoughtful","Connection","Autonomous"];
-  matrix.appendChild(cell("","headerCell"));
-  styles.forEach(s=>matrix.appendChild(cell(s,"headerCell")));
-  styles.forEach(r=>{
-    matrix.appendChild(cell(r,"headerCell"));
-    styles.forEach(c=>{
-      matrix.appendChild(cell("🟢","green"));
+/* =========================
+   MATRIX RENDER + CLICK
+   ========================= */
+function renderMatrix(primaryKey){
+  matrixEl.innerHTML = "";
+
+  // Top headers
+  matrixEl.appendChild(cellEl("", "header", null));
+  ["cd","tp","co","ac"].forEach(col=>{
+    matrixEl.appendChild(cellEl(STYLE_LABELS[col], "header", null));
+  });
+
+  // Rows
+  ["cd","tp","co","ac"].forEach(row=>{
+    matrixEl.appendChild(cellEl(STYLE_LABELS[row], "header", null));
+
+    ["cd","tp","co","ac"].forEach(col=>{
+      const color = MATRIX_LEVELS[row][col];
+      const key = `${row}-${col}`;
+      const icon = (color==="green") ? "🟢" : (color==="yellow") ? "🟡" : "🔴";
+      const c = cellEl(icon, color, key);
+
+      // Emphasize primary row
+      if (primaryKey && row !== primaryKey) c.classList.add("dim");
+
+      matrixEl.appendChild(c);
     });
   });
 }
 
-function cell(txt,cls){
-  const d=document.createElement("div");
-  d.className=`cell ${cls}`;
-  d.innerText=txt;
-  return d;
+function cellEl(text, cls, key){
+  const div = document.createElement("div");
+  div.className = `cell ${cls || ""}`.trim();
+  div.textContent = text;
+  if (key){
+    div.dataset.key = key;
+    div.addEventListener("click", ()=> onPairClick(div));
+  }
+  return div;
+}
+
+function onPairClick(div){
+  const key = div.dataset.key;
+  const data = PAIRING[key];
+  if (!data) return;
+
+  if (activeCell) activeCell.classList.remove("active");
+  activeCell = div;
+  div.classList.add("active");
+
+  pairDetails.classList.remove("hidden");
+  pairDetails.innerHTML = `
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+      <div class="badge">${data.icon} ${escapeHtml(data.level)}</div>
+      <div style="font-weight:850">${escapeHtml(data.title)}</div>
+    </div>
+    <div class="divider"></div>
+    <p style="margin:0 0 8px"><strong>Why it tends to feel this way:</strong> <span class="muted">${escapeHtml(data.why)}</span></p>
+    <p style="margin:0 0 8px"><strong>Works best when:</strong> <span class="muted">${escapeHtml(data.worksWhen)}</span></p>
+    <p style="margin:0"><strong>Early dating tip:</strong> <span class="muted">${escapeHtml(data.datingTip)}</span></p>
+  `;
+
+  // If clicking outside primary row, focus that row visually
+  const [row] = key.split("-");
+  if (currentPrimaryKey && row !== currentPrimaryKey){
+    matrixEl.querySelectorAll(".cell").forEach(c=>{
+      if (!c.dataset.key) return;
+      const r = c.dataset.key.split("-")[0];
+      c.classList.toggle("dim", r !== row);
+    });
+  }
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
+const errorBox = document.getElementById("errorBox");
+
+document.getElementById("btnResults").addEventListener("click", ()=>{
+  errorBox.style.display = "none";
+  const payload = scoreQuiz();
+  if (!payload){
+    errorBox.style.display = "block";
+    errorBox.scrollIntoView({behavior:"smooth", block:"center"});
+    return;
+  }
+  renderResults(payload);
+  document.getElementById("resultsCard").scrollIntoView({behavior:"smooth", block:"start"});
+});
+
+document.getElementById("btnReset").addEventListener("click", ()=>{
+  quizForm.reset();
+  updateProgress();
+  errorBox.style.display = "none";
+  resultsPane.classList.add("hidden");
+  resultsEmpty.classList.remove("hidden");
+  pairDetails.classList.add("hidden");
+  pairDetails.innerHTML = "";
+  currentPrimaryKey = null;
+  activeCell = null;
+  document.getElementById("statusPill").textContent = "25 questions • ~5 minutes";
+});
+
+/* =========================
+   HELPERS
+   ========================= */
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
 }
 </script>
-
 </body>
 </html>
+
